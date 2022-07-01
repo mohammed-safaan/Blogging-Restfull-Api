@@ -1,0 +1,5 @@
+::1 - - [01/Jul/2022:23:47:26 +0000] "GET /posts HTTP/1.1" 200 206 "-" "PostmanRuntime/7.29.0"
+::1 - - [01/Jul/2022:23:48:15 +0000] "POST /posts HTTP/1.1" 200 95 "-" "PostmanRuntime/7.29.0"
+::1 - - [01/Jul/2022:23:48:23 +0000] "POST /posts HTTP/1.1" 200 95 "-" "PostmanRuntime/7.29.0"
+::1 - - [01/Jul/2022:23:50:35 +0000] "DELETE /post/62bf87c7d327f1b1fcc02a2d HTTP/1.1" 200 95 "-" "PostmanRuntime/7.29.0"
+::1 - - [01/Jul/2022:23:52:05 +0000] "GET /posts HTTP/1.1" 200 414 "-" "PostmanRuntime/7.29.0"
