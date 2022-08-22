@@ -3,54 +3,60 @@ const router = express();
 const PostModel = require("../models/posts");
 router.use(express.json());
 // Get All Posts
-router.get("/", (req, res) => {
-  // console.log(PostModel.populated('author'));
-  PostModel.find({})
-  .populate('author')
-  .exec((err, posts) => {
-    if (!err) return res.status(200).json(posts);
+router.get("/", async (req, res) => {
+  try {
+    const posts = await PostModel.find({}).populate("author")
+    res.status(200).json(posts);
+  } catch (err) {
     console.log(err);
     res.status(500).json({ code: "DB_ERROR" });
-  });
+  }
 });
 
 // Done get post by id
-router.get("/:id", (req, res) => {
-  PostModel.find({ _id: req.params.id })
-  .populate('author')
-  .exec((err, post) => {
-    if (!err) return res.status(200).json(post);
+router.get("/:id", async (req, res) => {
+  try {
+    const postById = await PostModel.find({ _id: req.params.id }).populate("author");
+    res.status(200).json(postById);
+  } catch (error) {
     console.log(err);
     res.status(500).json({ code: "DB_ERROR" });
-  });
+  }
 });
 
 // Done Update post by id
-router.put("/:id", (req, res) => {
-  PostModel.findOneAndUpdate({ _id: req.params.id }, req.body, (err, data) => {
-    if (!err) return res.status(200).json(data);
+router.put("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const doc = await PostModel.findOneAndUpdate({ _id: id }, req.body);
+    res.status(200).json({ message: "updated", doc });
+  } catch (err) {
     console.log(err);
     res.status(500).json({ code: "DB_ERROR" });
-  });
+  }
 });
 
 // Done add post with req.body
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const postData = req.body;
   const post = new PostModel(postData);
-  post.save((err, savedpost) => {
-    if (!err) return res.json(savedpost);
+  try {
+    const savedPost = await post.save();
+    res.json(savedPost)
+  } catch (err) {
     console.log(err);
     res.status(500).json({ code: "DB_ERROR" });
-  });
+  }
 });
 
 // Done delete post by id
-router.delete("/:id", (req, res) => {
-  PostModel.findOneAndRemove({ _id: req.params.id }, (err, doc) => {
-    if (!err) return res.status(200).json(doc);
+router.delete("/:id",async (req, res) => {
+  try {
+    const deletedPost = await PostModel.findOneAndRemove({ _id: req.params.id })
+    res.status(200).json(deletedPost);
+  } catch (error) {
     console.log(err);
     res.status(500).json({ code: "DB_ERROR" });
-  });
+  }
 });
 module.exports = router;
