@@ -1,6 +1,6 @@
 # Blogging Restfull Api
 
-      This is a blogging api where it's implementing two main models (users, posts) and perform CRUD operations over them, also it has a logger that logs all incoming request (using the morgan package)
+This is a blogging api where it's implementing two main models ( users, posts ) and perform CRUD operations over them, also it has a logger that logs all incoming request ( using the morgan package )
 
 ## How to use ?
 
